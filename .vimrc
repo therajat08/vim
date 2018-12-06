@@ -39,47 +39,49 @@ execute pathogen#infect()
 "}}}
 
 " colors {{{
-"colorscheme badwolf
-"set termguicolors
+		colorscheme badwolf
+		syntax enable
+		set termguicolors
 "}}}
 
 "tabSpace{{{
-set tabstop=4
-set softtabstop=4
-"}}}
+		set tabstop=4
+		set softtabstop=4
+		"}}}
+
 "MOVEMENT
 
-" move vertically by visual line{{{
-nnoremap j gj
-nnoremap k gk
-"}}}
-" move to beginning/end of line{{{
-nnoremap B ^
-nnoremap E $
-"}}}
-" $/^ doesn't do anything{{{
-nnoremap $ <nop>
-nnoremap ^ <nop>
-"}}}
-" highlight last inserted text{{{
-nnoremap gV `[v`]
-"}}}
+		" move vertically by visual line{{{
+		nnoremap j gj
+		nnoremap k gk
+		"}}}
+		" move to beginning/end of line{{{
+		nnoremap B ^
+		nnoremap E $
+		"}}}
+		" $/^ doesn't do anything{{{
+		nnoremap $ <nop>
+		nnoremap ^ <nop>
+		"}}}
+		" highlight last inserted text{{{
+		nnoremap gV `[v`]
+		"}}}
 
 "Leader Shortcuts
-let mapleader=","       " leader is comma
+		let mapleader=","       " leader is comma
 
 " jk is escape
-inoremap jk <esc>
+		inoremap jk <esc>
 
 " toggle gundo
 "nnoremap <F5> :GundoToggle<CR>
 "gundo wasnt runnin using undotree for now..... to use gundo do :source % in plugin folder of gundo cos i havent done that
 
 "undotree
-nnoremap <F5> :UndotreeToggle<CR>
-"to nat let working directory messed with undo directories{{{
-if has("persistent_undo")
-    set undodir=~/.undodir/
-    set undofile
-endif
-"}}}
+		nnoremap <leader>u :UndotreeToggle<CR>
+		"to nat let working directory messed with undo directories{{{
+		if has("persistent_undo")
+			set undodir=~/.undodir/
+			set undofile
+		endif
+		"}}}
