@@ -9,13 +9,13 @@ execute pathogen#infect()
 
 "Below code is from github file
 "searching
-"{{{
+		"{{{
                 set incsearch "search as characters are entered
                 set hlsearch "highlight matches
 
                 "turning off search highlight
                                 nnoremap <leader><space> :nohlsearch<CR>
-"}}}
+		"}}}
 
 "disabling error bells
 "{{{
@@ -29,20 +29,27 @@ execute pathogen#infect()
 "}}}
 
 "improving backspace functionality
-"{{{
+		"{{{
                 set backspace=indent,eol,start
-"}}}
+		"}}}
 
 "showing line numbers
-"{{{
+		"{{{
                 set number
-"}}}
+		"}}}
 
 " colors {{{
+		""colorscheme solarized
 		colorscheme badwolf
 		syntax enable
+		"auto detecting using vim background detection
 		set termguicolors
-"}}}
+		if has('gui_running')
+			set background=light
+		else
+			set background=dark
+		endif
+		"}}}
 
 "tabSpace{{{
 		set tabstop=4
@@ -85,3 +92,10 @@ execute pathogen#infect()
 			set undofile
 		endif
 		"}}}
+
+"folding
+		set foldenable          " enable folding
+		set foldlevelstart=10   " open most folds by default
+		" space open/closes folds
+		nnoremap <space> za
+		set foldmethod=indent   " fold based on indent level
