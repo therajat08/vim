@@ -99,3 +99,7 @@ execute pathogen#infect()
 		" space open/closes folds
 		nnoremap <space> za
 		set foldmethod=indent   " fold based on indent level
+
+" turn hybrid line numbers on
+		:set number relativenumber
+		:set nu rnu
