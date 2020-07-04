@@ -63,7 +63,19 @@ endif
 "below is  my own vimrc
 "***********************************************************************
 
-"autocmd vimenter * NERDTree
+" adding cmds for different settings for different file types
+"To enable file type detection"
+	filetype  on
+	filetype plugin on
+	 augroup Java_C_Settings
+		"the command below execute the script for the specific filetype md 
+		 autocmd FileType markdown source  /usr/share/vim/settings/md-settings.vim
+
+		"the command below execute the script for the specific filetype Java
+		"autocmd FileType java source /path-for-Java-settings/Java-settings.vim
+	 augroup END
+
+""autocmd vimenter * NERDTree
 map <C-n> :NERDTreeToggle<CR>
 "execute pathogen#infect()
 "autocmd StdinReadPre * let s:std_in=1
@@ -237,6 +249,10 @@ call plug#begin('~/.vim/plugged')
 		Plug 'majutsushi/tagbar'
 		
 		Plug 'Nopik/vim-nerdtree-direnter' "to prevent new tabsopening while trversing directory in nerdtree
+
+		" adding plugins for writing purpose {{{
+			Plug 'reedes/vim-pencil' " for wrapping and other things 
+		" }}}
 call plug#end()
 
 "adding lines for youcompleteme c family support after making a function in
@@ -293,3 +309,7 @@ inoremap <C-e> <C-o>A
 " newtab
 	nnoremap <C-Left> :tabprevious<CR>                                                                            
 	nnoremap <C-Right> :tabnext<CR>
+
+" adding code for tabline with airline
+	let g:airline#extensions#tabline#enabled = 1
+
