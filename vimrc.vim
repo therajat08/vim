@@ -214,46 +214,6 @@ map <C-n> :NERDTreeToggle<CR>
 "call plug#begin to call plug#end is for vim-plug manager
 " source used for this : https://2sang.github.io/journal/vim-snippets-management.html
 "
-call plug#begin('~/.vim/plugged')
-
-		Plug 'SirVer/ultisnips'
-		Plug 'honza/vim-snippets'
-	
-		"below function is needed for ycm
-		function! BuildYCM(info)
-		  " info is a dictionary with 3 fields
-		  " - name:   name of the plugin
-		  " - status: 'installed', 'updated', or 'unchanged'
-		  " - force:  set on PlugInstall! or PlugUpdate!
-		  if a:info.status == 'installed' || a:info.force
-			!./install.py
-		  endif
-		endfunction
-
-		Plug 'ycm-core/YouCompleteMe', { 'do': function('BuildYCM') }
-
-		Plug 'jiangmiao/auto-pairs' " for bracket auto completion
-
-		Plug 'Yggdroot/indentLine' " for indentation colored guide
-
-		Plug 'tyru/caw.vim' "plugin for commenting
-
-		Plug 'nathanaelkane/vim-indent-guides' "plugin for color indent
-
-		Plug 'morhetz/gruvbox'
-
-		Plug 'vitalk/vim-simple-todo'
-
-		Plug 'vim-airline/vim-airline'
-
-		Plug 'majutsushi/tagbar'
-		
-		Plug 'Nopik/vim-nerdtree-direnter' "to prevent new tabsopening while trversing directory in nerdtree
-
-		" adding plugins for writing purpose {{{
-			Plug 'reedes/vim-pencil' " for wrapping and other things 
-		" }}}
-call plug#end()
 
 "adding lines for youcompleteme c family support after making a function in
 "ycm source: https://unixnme.blogspot.com/2017/03/how-to-install-youcompleteme-vim-plugin.html
@@ -312,4 +272,62 @@ inoremap <C-e> <C-o>A
 
 " adding code for tabline with airline
 	let g:airline#extensions#tabline#enabled = 1
+	
+" needed for vim-devicons
+	set encoding=UTF-8
 
+" adding lines to configure powerline
+set  rtp+=/home/rajat/.local/lib/python3.6/site-packages/powerline/bindings/vim/
+set laststatus=2
+set t_Co=256	
+
+" change below line to switch between airline and powerline
+	let g:airline_disable_statusline = 1
+
+call plug#begin('~/.vim/plugged')
+
+		Plug 'SirVer/ultisnips'
+		Plug 'honza/vim-snippets'
+	
+		"below function is needed for ycm
+		function! BuildYCM(info)
+		  " info is a dictionary with 3 fields
+		  " - name:   name of the plugin
+		  " - status: 'installed', 'updated', or 'unchanged'
+		  " - force:  set on PlugInstall! or PlugUpdate!
+		  if a:info.status == 'installed' || a:info.force
+			!./install.py
+		  endif
+		endfunction
+
+		Plug 'ycm-core/YouCompleteMe', { 'do': function('BuildYCM') }
+
+		Plug 'jiangmiao/auto-pairs' " for bracket auto completion
+
+		Plug 'Yggdroot/indentLine' " for indentation colored guide
+
+		Plug 'tyru/caw.vim' "plugin for commenting
+
+		Plug 'nathanaelkane/vim-indent-guides' "plugin for color indent
+
+		Plug 'morhetz/gruvbox'
+
+		Plug 'vitalk/vim-simple-todo'
+
+		Plug 'vim-airline/vim-airline'
+
+		Plug 'majutsushi/tagbar'
+		
+		Plug 'Nopik/vim-nerdtree-direnter' "to prevent new tabsopening while trversing directory in nerdtree
+
+
+		" adding plugins for writing purpose {{{
+			Plug 'reedes/vim-pencil' " for wrapping and other things 
+		" }}}
+		
+		Plug 'mhinz/vim-startify' "for a welcome screen
+
+		Plug 'ryanoasis/vim-devicons' " adding plugin to display icons for diff filetypes
+		"Always load the vim-devicons as the very last one.
+		
+call plug#end()
