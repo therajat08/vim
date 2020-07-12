@@ -284,6 +284,41 @@ set t_Co=256
 " change below line to switch between airline and powerline
 	let g:airline_disable_statusline = 1
 
+" adding lines to automatically change current directory of file as working
+" directory
+	autocmd BufEnter * lcd %:p:h
+
+" using alias for frequently used commands
+" a note: the alias name should start with a capital letter
+	command Bda set background=dark
+	command Bli set background=light
+
+" adding line for react plugin vim-jsx-pretty{{{
+	let g:vim_jsx_pretty_highlight_close_tag = 1
+	"Support highlighting the close tag separately from the open tag
+	
+	let g:vim_jsx_pretty_colorful_config = 1 	
+
+	"}}}
+	
+"line to toggle transparency
+" source https://www.reddit.com/r/vim/comments/74pw75/how_to_toggle_transparent_background_in_vim/
+	let t:is_transparent = 0
+	function! Toggle_transparent()
+		if t:is_transparent == 0
+			hi Normal guibg=NONE ctermbg=NONE
+			let t:is_transparent = 1
+		else
+			set background=dark
+			let t:is_tranparent = 0
+		endif
+	endfunction
+	nnoremap <F4> : call Toggle_transparent()<CR>
+
+" adding line to allow text copied from vim to be pasted elsewhere
+	set clipboard=unnamed
+	set clipboard=unnamedplus
+
 call plug#begin('~/.vim/plugged')
 
 		Plug 'SirVer/ultisnips'
@@ -329,5 +364,7 @@ call plug#begin('~/.vim/plugged')
 
 		Plug 'ryanoasis/vim-devicons' " adding plugin to display icons for diff filetypes
 		"Always load the vim-devicons as the very last one.
+
+		Plug 'maxmellon/vim-jsx-pretty' " for react highlight and indent
 		
 call plug#end()
