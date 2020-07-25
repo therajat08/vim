@@ -135,13 +135,16 @@ map <C-n> :NERDTreeToggle<CR>
 
     
 		"tabSpace{{{
-                 :set tabstop=4    
-                 " :set expandtab     
-                 :set shiftwidth=4  
-                 :set autoindent    
+                 :set tabstop=2    
+                 :set expandtab     
+                 :set shiftwidth=2  
+                  :set autoindent    
                  :set smartindent   
                  :set cindent             
 		"}}}
+    
+    "helps in avoiding unwanted indentation whille pasting
+        :set pastetoggle=<f5>
 
 "MOVEMENT
 
@@ -316,19 +319,35 @@ set t_Co=256
 	nnoremap <F4> : call Toggle_transparent()<CR>
 
 " adding line to allow text copied from vim to be pasted elsewhere
-	set clipboard=unnamed
-	set clipboard=unnamedplus
+" had to install vim-gnome for this to include +clipboard and +xterm_clipboard
+		set clipboard=unnamed
+		set clipboard=unnamedplus
 
-call plug#begin('~/.vim/plugged')
+" code to display end of file($) and tab (^)
+	set list
+	set listchars=tab:▸·,eol:⏎
+	"tabs will be shown as ▸ for the start position and · through the rest of the tab
+  
+  "adding cmd for limelight
+  let g:limelight_conceal_ctermfg = 240
 
-		Plug 'SirVer/ultisnips'
-		Plug 'honza/vim-snippets'
-	
-		"below function is needed for ycm
-		function! BuildYCM(info)
-		  " info is a dictionary with 3 fields
-		  " - name:   name of the plugin
-		  " - status: 'installed', 'updated', or 'unchanged'
+  " improving goyo height
+  let g:goyo_height = '100%'  
+
+  " mapping for goyo and limelight
+  :map <F6> :Goyo<CR>
+  :map <F7> :Limelight!!<CR>
+
+  "addind comd to esc then A
+    inoremap jl <esc><S-a>
+ 
+  call plug#begin('~/.vim/plugged') "prakat-ho
+
+    Plug 'SirVer/ultisnips'
+    Plug 'honza/vim-snippets'
+
+    "below function is needed for ycm
+    function! BuildYCM(info)
 		  " - force:  set on PlugInstall! or PlugUpdate!
 		  if a:info.status == 'installed' || a:info.force
 			!./install.py
@@ -367,4 +386,12 @@ call plug#begin('~/.vim/plugged')
 
 		Plug 'maxmellon/vim-jsx-pretty' " for react highlight and indent
 		
+		Plug 'tpope/vim-surround' "for quoting and parenhesizing
+
+    Plug 'junegunn/limelight.vim' "for distraction free editing
+
+    Plug 'junegunn/goyo.vim'
 call plug#end()
+" All system-wide defaults are set in $VIMRUNTIME/debian.vim and sourced by
+" the call to :runtime you can find below.  If you wish to change any of those
+" settings, you should do it in this file (/etc/vim/vimrc), since debian.vim
