@@ -45,7 +45,7 @@ endif
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
-"set showcmd		" Show (partial) command in status line.
+set showcmd		" Show (partial) command in status line.
 "set showmatch		" Show matching brackets.
 "set ignorecase		" Do case insensitive matching
 "set smartcase		" Do smart case matching
@@ -119,7 +119,8 @@ map <C-n> :NERDTreeToggle<CR>
 		" 	set background=dark
 		" endif
 		"}}}
-		"
+		
+
 		"below lines change color scheme depending on daytime
 		 if strftime("%H") < 12
 				 set background=light
@@ -129,6 +130,14 @@ map <C-n> :NERDTreeToggle<CR>
 				 set background=dark
 		 endif
 		
+    " following line to show highlight in spell check 
+    " taken from: https://vi.stackexchange.com/questions/18295/how-to-set-a-colorscheme-that-still-shows-spelling-errors
+    augroup my_colours
+      autocmd!
+      autocmd ColorScheme gruvbox hi SpellBad cterm=reverse cterm=underline ctermfg=red
+    augroup END
+    " hi clear SpellBad
+    " hi SpellBad 
 
 		"for gruvbox theme plug
 		autocmd vimenter * colorscheme gruvbox
@@ -157,8 +166,8 @@ map <C-n> :NERDTreeToggle<CR>
 		" nnoremap E $
 		"}}}
 		" $/^ doesn't do anything{{{
-		nnoremap $ <nop>
-		nnoremap ^ <nop>
+		" nnoremap $ <nop>
+		" nnoremap ^ <nop>
 		"}}}
 		" highlight last inserted text{{{
 		nnoremap gV `[v`]
@@ -270,8 +279,8 @@ inoremap <C-e> <C-o>A
 
 " to navigate between tabs use mouse to open file in adjacent tab; enter for
 " newtab
-	nnoremap <C-Left> :tabprevious<CR>                                                                            
-	nnoremap <C-Right> :tabnext<CR>
+	nnoremap <C-j> :tabprevious<CR>                                                                            
+	nnoremap <C-k> :tabnext<CR>
 
 " adding code for tabline with airline
 	let g:airline#extensions#tabline#enabled = 1
@@ -340,7 +349,27 @@ set t_Co=256
 
   "addind comd to esc then A
     inoremap jl <esc><S-a>
- 
+
+  set cursorline        " highlight current line
+  set cursorcolumn " highlight current column
+  
+" config for indent line 
+" let g:indentLine_setColors = 0
+" let g:indentLine_char_list = ['|', '¦', '┆', '']
+let g:indentLine_char = '┊'
+let g:indentLine_color_term = 144 
+  :map <F8> :IndentLinesToggle<CR>
+let g:indentLine_enabled = 0
+
+
+" adding config for emmet vim
+  " To remap the default <C-Y> leader:
+    let g:user_emmet_leader_key=','
+    
+    " let g:user_emmet_mode='n' "only enable normal mode functions.   
+    let g:user_emmet_mode='a'    "enable all function in all mode.
+".........................................................................................................
+".........................................................................................................
   call plug#begin('~/.vim/plugged') "prakat-ho
 
     Plug 'SirVer/ultisnips'
@@ -391,7 +420,9 @@ set t_Co=256
     Plug 'junegunn/limelight.vim' "for distraction free editing
 
     Plug 'junegunn/goyo.vim'
+
+    Plug 'mattn/emmet-vim'
 call plug#end()
 " All system-wide defaults are set in $VIMRUNTIME/debian.vim and sourced by
 " the call to :runtime you can find below.  If you wish to change any of those
-" settings, you should do it in this file (/etc/vim/vimrc), since debian.vim
+"
