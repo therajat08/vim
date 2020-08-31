@@ -107,6 +107,10 @@ map <C-n> :NERDTreeToggle<CR>
 "showing line numbers
 		"{{{
                 set number
+" turn hybrid line numbers on
+    autocmd InsertEnter * :set norelativenumber
+    autocmd InsertLeave * :set relativenumber 
+    set rnu
 		"}}}
 
 " colors {{{
@@ -174,7 +178,9 @@ map <C-n> :NERDTreeToggle<CR>
 		"}}}
 
 "Leader Shortcuts
-		let mapleader=","       " leader is comma
+" let mapleader=","       
+
+" leader is comma
 
 " jk is escape
 		inoremap jk <esc>
@@ -199,9 +205,6 @@ map <C-n> :NERDTreeToggle<CR>
 		" nnoremap <space> za
 		"set foldmethod=indent   " fold based on indent level
 
-" turn hybrid line numbers on
-		:set number relativenumber
-		:set nu rnu
 		
 
 "code to make insert go green 
@@ -349,9 +352,10 @@ set t_Co=256
 
   "addind comd to esc then A
     inoremap jl <esc><S-a>
-
-  set cursorline        " highlight current line
-  set cursorcolumn " highlight current column
+  " highlight current line
+  " set cursorline
+  " set cursorcolumn 
+  " highlight current column
   
 " config for indent line 
 " let g:indentLine_setColors = 0
@@ -368,7 +372,31 @@ let g:indentLine_enabled = 0
     
     " let g:user_emmet_mode='n' "only enable normal mode functions.   
     let g:user_emmet_mode='a'    "enable all function in all mode.
-".........................................................................................................
+
+    "adding code to disable preview window
+    set completeopt-=preview
+
+    " adding block for dragvisuals.vim
+    runtime plugin/dragvisuals.vim
+    vmap  <expr>  <LEFT>   DVB_Drag('left')
+    vmap  <expr>  <RIGHT>  DVB_Drag('right')
+    vmap  <expr>  <DOWN>   DVB_Drag('down')
+    vmap  <expr>  <UP>     DVB_Drag('up')
+    vmap  <expr>  D        DVB_Duplicate()
+    let g:DVB_TrimWS = 1 
+
+    " making 81st column hightlight on line overflow
+    highlight ColorColumn ctermbg=magenta 
+    "color is not working
+    call matchadd('ColorColumn', '\%81v', 100)
+
+    "for simplyfold plugin
+    let g:SimpylFold_docstring_preview = 1
+
+"code for toggling between dark and light mode
+    map <F9> :let &background = ( &background == "dark"? "light" : "dark" )<CR><CR>
+
+"........................................................................................................
 ".........................................................................................................
   call plug#begin('~/.vim/plugged') "prakat-ho
 
@@ -422,6 +450,9 @@ let g:indentLine_enabled = 0
     Plug 'junegunn/goyo.vim'
 
     Plug 'mattn/emmet-vim'
+
+    Plug 'mariappan/dragvisuals.vim'
+
 call plug#end()
 " All system-wide defaults are set in $VIMRUNTIME/debian.vim and sourced by
 " the call to :runtime you can find below.  If you wish to change any of those
